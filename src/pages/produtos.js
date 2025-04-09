@@ -84,7 +84,7 @@ const produtos = [
       nome: "Space Waves",
       descricao: "O Space Waves é um jogo de arcade em que você precisa controlar uma seta para evitar obstáculos até chegar ao final. Há 33 níveis no jogo, e você pode escolher qualquer nível que quiser jogar a qualquer momento. Todos os níveis variam em dificuldade e são rotulados de acordo com os rostos; dessa forma, você pode decidir o quão corajoso quer ser.",
       creditos: "do.games",
-      tags: ["Casual", "Um Botão", "Mobile", "Difícil", "Mouse", "Arcade", "2D"],
+      tags: ["Casual", "Um Botão", "Mobile", "Difícil", "Mouse", "Arcade", "2D", "Pezy"],
       tecnologia: "HTML5 (Unity WebGL)",
       plataforma: "Browser (desktop, mobile, tablet)",
       lancado: "abril de 2024",
