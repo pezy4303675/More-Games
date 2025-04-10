@@ -18,7 +18,17 @@ function Home({ searchQuery }) {
   }, [searchQuery]);
 
   return (
-    <div className="games">
+    <div>
+       <div className="ifofr" id="popo">
+          <ul>
+        <li className="tgh">Sobre o More Games</li>
+        <br/>
+        <br/>
+        <li><p><span className="rrt">More Games</span> é um site independente de jogos de navegador, criado com paixão e dedicação por apenas uma pessoa:<span className="rrt"> Daniel Alfredo Nunes</span>. Lançado em <span className="rrt">9 de abril de 2025</span>, o objetivo do site é oferecer uma experiência divertida, acessível e sem complicações para quem ama jogar direto do navegador, sem precisar baixar nada.<br/><br/></p></li> 
+</ul>
+        </div>
+        <br/>
+       <div className="games">
       {filteredProducts.map((produto) => (
         <div className="gamesitem" key={produto.id}>
           <Link to={`/produto/${produto.id}`} className="product-container">
@@ -35,6 +45,7 @@ function Home({ searchQuery }) {
           </Link>
         </div>
       ))}
+    </div>
     </div>
   );
 }
