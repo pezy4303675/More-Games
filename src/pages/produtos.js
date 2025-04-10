@@ -110,7 +110,114 @@ const produtos = [
       plataforma: "Browser (desktop, mobile, tablet), App Store(iOS, Android)",
       lancado: "maio de 2022",
       link: "https://www.crazygames.com.br/embed/helix-jump"
+    },{
+      id: 11,
+      image: "https://cdn.gamerina.io/prinxy.app/prinxy.app-girl-games-games-for-girls-asmr-beauty-homeless-asmr-beauty-homeless-game-homeless-makeover-game-1729606505282.jpg",
+      nome: "ASMR Beauty Homeless",
+      descricao: "ASMR Beauty Homeless é um jogo de beleza no qual você assume o papel de um médico dedicado que ajuda sua amiga sem-teto Anna a recuperar a dignidade. Comece fornecendo a ela os cuidados essenciais de higiene - limpe-a, escove seus dentes e trate cuidadosamente a área ao redor do piercing para restaurar sua saúde e conforto. Depois que ela estiver nos trinques, mostre sua experiência em moda escolhendo a roupa perfeita que transforme a aparência dela e a deixe mais feliz.",
+      creditos: "Go Panda Games.",
+      tags: ["Beleza", "2D", "Maquilhagem", "Médico", "Mouse"],
+      tecnologia: "HTML5",
+      plataforma: "Browser (desktop, mobile, tablet), App Store(iOS)",
+      lancado: "setembro de 2024",
+      link: "https://www.crazygames.com.br/embed/asmr-beauty-homeless"
+    },{
+      id: 12,
+      image: "https://imgs.crazygames.com/night-city-racing/20230127195620/night-city-racing-cover?metadata=none&quality=40&width=1200&height=630&fit=crop",
+      nome: "Night City Racing",
+      descricao: "Night City Racing é um emocionante jogo de corrida 3D ambientado em uma cidade futurista repleta de luzes neon. Compita sozinho ou em modo multiplayer local em pistas desafiadoras com carros superpotentes. Personalize seu veículo, participe de corridas emocionantes e prove suas habilidades no volante enquanto explora uma cidade vibrante e cheia de ação.",
+      creditos: "RHM Interactive",
+      tags: ["Corrida", "Carros", "3D", "Multiplayer", "Desafiante", "Personalização"],
+      tecnologia: "HTML5",
+      plataforma: "Browser (desktop, mobile)",
+      lancado: "janeiro de 2023",
+      link: "https://www.crazygames.com.br/embed/night-city-racing"
+    },{
+      id: 13,
+      image: "https://play-lh.googleusercontent.com/c24WYh758CQVm5bzs0NrLha4KGqsgcwKW19QH4At1iWT4_uMFNBWSDb5D75oYqffh4E",
+      nome: "Slice Master",
+      descricao: "Slice Master é um jogo de um botão que oferece uma experiência ASMR relaxante. Controle uma faca voadora para cortar objetos com precisão e acumular pontos. O jogo testa sua habilidade de timing e precisão em desafios cada vez mais difíceis.",
+      creditos: "CrazyGames",
+      tags: ["Casual", "ASMR", "Precisão", "Mouse", "Um Botão"],
+      tecnologia: "HTML5",
+      plataforma: "Browser (desktop, mobile, tablet)",
+      lancado: "Data de lançamento não especificada",
+      link: "https://www.crazygames.com.br/embed/slice-master"
     },
+    {
+      id: 14,
+      image: "https://play-lh.googleusercontent.com/fsobrE1ofpThTcntgndmAD3OThSWNrh50h8o7B9mTDIFpN6AEyhAOoWKq3xx7YSG4vM",
+      nome: "One Line",
+      descricao: "One Line é um jogo casual de desenho onde você deve usar uma única linha para proteger um personagem de diversos perigos, como chuva, abelhas e gigantes. Cada nível apresenta um novo desafio que testa sua criatividade e raciocínio.",
+      creditos: "CrazyGames",
+      tags: ["Casual", "Desenho", "Quebra-Cabeça", "Criatividade", "Mouse"],
+      tecnologia: "HTML5",
+      plataforma: "Browser (desktop, mobile, tablet)",
+      lancado: "Data de lançamento não especificada",
+      link: "https://www.crazygames.com.br/embed/oneline"
+    },
+    {
+      id: 15,
+      image: "https://doodlebaseball.io/data/image/game/crazy-flips-3d.jpeg",
+      nome: "Crazy Flips 3D",
+      descricao: "Crazy Flips 3D é um jogo de esportes onde você realiza acrobacias e saltos mortais em ambientes tridimensionais. Teste suas habilidades de timing e precisão para completar desafios e alcançar pontuações altas.",
+      creditos: "CrazyGames",
+      tags: ["Esportes", "3D", "Acrobacias", "Habilidades", "Mouse"],
+      tecnologia: "HTML5 (Unity WebGL)",
+      plataforma: "Browser (desktop, mobile, tablet)",
+      lancado: "Julho de 2021",
+      link: "https://www.crazygames.com.br/embed/crazy-flips-3d"
+    },
+    {
+      id: 16,
+      image: "https://cdn.jogos360.com.br/de/ad/deadshot-io-d.jpg",
+      nome: "DEADSHOT.io",
+      descricao: "DEADSHOT.io é um jogo de tiro em primeira pessoa online que oferece diversos mapas, armas e modos de jogo. Desafie amigos e jogadores de todo o mundo em partidas intensas e competitivas.",
+      creditos: "CrazyGames",
+      tags: ["Ação", "FPS", "Multiplayer", "Tiro", "Competitivo"],
+      tecnologia: "HTML5",
+      plataforma: "Browser (desktop, mobile, tablet)",
+      lancado: "Data de lançamento não especificada",
+      link: "https://www.crazygames.com.br/embed/deadshot-io"
+    },
+    {
+      id: 17,
+      image: "https://data.gameflare.com/games/9677/cqC65M0RK6ne5r-400-300.jpg",
+      nome: "Squid Game Online",
+      descricao: "Squid Game Online é um jogo de sobrevivência multiplayer inspirado na série Round 6. Compita contra 30 jogadores em sete minijogos desafiadores, onde falhar resulta em eliminação.",
+      creditos: "CrazyGames",
+      tags: ["Ação", "Sobrevivência", "Multiplayer", "Desafiante", "Inspirado em Série"],
+      tecnologia: "HTML5",
+      plataforma: "Browser (desktop, mobile, tablet)",
+      lancado: "Data de lançamento não especificada",
+      link: "https://www.crazygames.com.br/embed/squid-game-online"
+    },
+    {
+      id: 18,
+      image: "https://s.cafebazaar.ir/images/icons/com.bridgerace.bridgerun.stairsbuild-7f9d583b-9568-4d3f-9a2e-3c08ac2bf8f1_512x512.png?x-img=v1/resize,h_256,w_256,lossless_false/optimize",
+      nome: "Bridge Race",
+      descricao: "Bridge Race é um jogo casual onde você coleta blocos da sua cor para construir pontes e superar obstáculos. Compita contra outros jogadores para ver quem consegue completar a ponte primeiro.",
+      creditos: "CrazyGames",
+      tags: ["Casual", "Corrida", "Multiplayer", "Construção", "Competitivo"],
+      tecnologia: "HTML5 (Unity WebGL)",
+      plataforma: "Browser (desktop, mobile, tablet), App Store (iOS, Android)",
+      lancado: "Dezembro de 2024",
+      link: "https://www.crazygames.com.br/embed/bridge-race"
+    },
+    {
+      id: 19,
+      image: "https://play-lh.googleusercontent.com/0yIJh_VGnvdV76Ble36OZdZ0GJeiUMiR1F-ZC7meVm5sATjZWdisc5CY0p-xJugicnLK=w526-h296-rw",
+      nome: "Planet Smash Destruction",
+      descricao: "Planet Smash Destruction é um jogo casual que permite criar e destruir planetas usando diversas armas e ferramentas cósmicas. Experimente diferentes combinações para ver os efeitos de destruição em massa.",
+      creditos: "CrazyGames",
+      tags: ["Casual", "Simulação", "Espaço", "Destruição", "Criatividade"],
+      tecnologia: "HTML5",
+      plataforma: "Browser (desktop, mobile, tablet), App Store (iOS, Android)",
+      lancado: "Data de lançamento não especificada",
+      link: "https://www.crazygames.com.br/embed/solar-smash"
+    },
+    
+  
   
     
   ];
