@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: /admin/
 Allow: /produto/
-Sitemap: https://moregamess.vercel.app/sitemap.xml
+Sitemap: https://moregamess.vercel.app/mm.xml
