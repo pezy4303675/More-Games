@@ -1,6 +1,5 @@
 
 const produtos = [
-/*
     {
       id: 1,
       image: "https://imgs.crazygames.com/murder-mafia_16x9/20230915113149/murder-mafia_16x9-cover?metadata=none&quality=40&width=1200&height=630&fit=crop",
@@ -91,7 +90,6 @@ const produtos = [
       link: "https://www.crazygames.com.br/embed/space-waves"
     },
   
- */
     
   ];
   
