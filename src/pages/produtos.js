@@ -88,6 +88,28 @@ const produtos = [
       plataforma: "Browser (desktop, mobile, tablet)",
       lancado: "abril de 2024",
       link: "https://www.crazygames.com.br/embed/space-waves"
+    },{
+      id: 9,
+      image: "https://holey-io.com/wp-content/uploads/2023/09/In-Holey-io-Battle-Royale-become-the-master-of-a-relentless-black-hole-2.webp",
+      nome: "Holey.io Battle Royale",
+      descricao: "O Holey.io é um jogo multijogador de battle royale em que você consome vários itens e adversários menores. Você ficará maior à medida que engolir! O mapa encolherá continuamente, forçando os jogadores a entrar em um ambiente mais estreito até que reste apenas uma pessoa de pé. Consuma, cresça e torne-se o último buraco negro em pé na arena!",
+      creditos: "Crazy Games.",
+      tags: [".io", "Crescer", "Mobile", "Top-Down", "Mouse", "Arena", "Battle Royale",],
+      tecnologia: "HTML5",
+      plataforma: "Browser (desktop, mobile, tablet)",
+      lancado: "agosto de 2023",
+      link: "https://www.crazygames.com.br/embed/holey-io-battle-royale"
+    },{
+      id: 10,
+      image: "https://tcf.admeen.org/game/18500/18052/400x246/helix-jump.jpg",
+      nome: "Helix Jump",
+      descricao: "O Helix Jump é um jogo casual com uma mecânica simples e viciante. No jogo, você guia uma bola quicando continuamente por uma série de plataformas circulares até cair. Caia pelas fendas e evite aterrissar nas zonas proibidas!",
+      creditos: "Voodoo.",
+      tags: ["Casual", "Um Botão", "Evitar", "1 jogador", "Mouse", "Plataforma", "Arcade","Habilidades","Bola", "Mini"],
+      tecnologia: "HTML5",
+      plataforma: "Browser (desktop, mobile, tablet), App Store(iOS, Android)",
+      lancado: "maio de 2022",
+      link: "https://www.crazygames.com.br/embed/helix-jump"
     },
   
     
