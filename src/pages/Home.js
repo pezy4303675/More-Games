@@ -21,7 +21,7 @@ function Home({ searchQuery }) {
     <div>
        <div className="ifofr" id="popo">
           <ul>
-        <li><p>Mais Jogos – Jogue grátis, sem login! Diversão instantânea com bolsas de jogos online direto no navegador. Sem downloads, sem cadastro. É só entrar e jogar!<br/><br/></p></li> 
+        <li><p>Mais Jogos – Jogue grátis, sem login! Diversão instantânea com bolsas de jogos online direto no navegador. Sem downloads, sem cadastro. É só entrar e jogar!</p></li> 
 </ul>
         </div>
         <br/>
