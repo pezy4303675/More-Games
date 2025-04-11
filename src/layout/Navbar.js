@@ -33,7 +33,6 @@ function Navbar({ setSearchQuery }) {
             to={val.link}
             key={key}
             className="nav-link"
-            activeClassName="active"
           >
             {val.icon}
           </NavLink>
@@ -119,30 +118,64 @@ function Navbar({ setSearchQuery }) {
 
         .nav-link {
           color: rgba(255, 255, 255, 0.7);
-          transition: all 0.3s ease;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           position: relative;
-          padding: 0.5rem;
+          padding: 0.8rem 1.2rem;
+          border-radius: 12px;
+          background: linear-gradient(to right, transparent, transparent);
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 500;
+          letter-spacing: 0.5px;
+          backdrop-filter: blur(5px);
         }
 
         .nav-link:hover {
           color: white;
-          transform: translateY(-2px);
+          transform: translateY(-2px) scale(1.05);
+          background: linear-gradient(120deg, rgba(104, 66, 255, 0.15), rgba(104, 66, 255, 0.05));
+          box-shadow: 0 8px 20px rgba(104, 66, 255, 0.2);
         }
 
         .nav-link.active {
           color: #6842ff;
+          background: rgba(104, 66, 255, 0.1);
+          box-shadow: inset 0 0 15px rgba(104, 66, 255, 0.1);
+        }
+
+        .nav-link::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(120deg, rgba(104, 66, 255, 0.2), rgba(104, 66, 255, 0));
+          transform: scaleX(0);
+          transform-origin: right;
+          transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          z-index: -1;
+          border-radius: 12px;
+        }
+
+        .nav-link:hover::before {
+          transform: scaleX(1);
+          transform-origin: left;
         }
 
         .nav-link.active::after {
           content: '';
           position: absolute;
-          bottom: -4px;
-          left: 0;
-          width: 100%;
-          height: 2px;
-          background: #6842ff;
-          border-radius: 2px;
-          animation: slideIn 0.3s ease;
+          bottom: -2px;
+          left: 10%;
+          width: 80%;
+          height: 3px;
+          background: linear-gradient(to right, #6842ff, #8f75ff);
+          border-radius: 4px;
+          animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          box-shadow: 0 2px 8px rgba(104, 66, 255, 0.3);
         }
 
         @keyframes slideIn {
