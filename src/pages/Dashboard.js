@@ -7,7 +7,11 @@ function Dashboard() {
     nome: '',
     image: '',
     descricao: '',
-    categoria: '',
+    creditos: '',
+    tags: [],
+    tecnologia: '',
+    plataforma: '',
+    lancado: '',
     link: ''
   });
   const [games, setGames] = useState(produtos);
@@ -45,7 +49,11 @@ function Dashboard() {
       nome: '',
       image: '',
       descricao: '',
-      categoria: '',
+      creditos: '',
+      tags: [],
+      tecnologia: '',
+      plataforma: '',
+      lancado: '',
       link: ''
     });
   };
@@ -95,10 +103,53 @@ function Dashboard() {
             <div className="form-group">
               <input
                 type="text"
-                name="categoria"
-                value={newGame.categoria}
+                name="creditos"
+                value={newGame.creditos}
                 onChange={handleInputChange}
-                placeholder="Categoria"
+                placeholder="Créditos (desenvolvedor/estúdio)"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="text"
+                name="tags"
+                value={newGame.tags.join(', ')}
+                onChange={(e) => setNewGame(prev => ({
+                  ...prev,
+                  tags: e.target.value.split(',').map(tag => tag.trim())
+                }))}
+                placeholder="Tags (separadas por vírgula)"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="text"
+                name="tecnologia"
+                value={newGame.tecnologia}
+                onChange={handleInputChange}
+                placeholder="Tecnologia (ex: HTML5, Unity WebGL)"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="text"
+                name="plataforma"
+                value={newGame.plataforma}
+                onChange={handleInputChange}
+                placeholder="Plataforma (ex: Browser, mobile, tablet)"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="text"
+                name="lancado"
+                value={newGame.lancado}
+                onChange={handleInputChange}
+                placeholder="Data de lançamento"
                 required
               />
             </div>
@@ -123,9 +174,22 @@ function Dashboard() {
           <div className="games-grid">
             {games.map(game => (
               <div key={game.id} className="game-card">
-                <img src={game.image} alt={game.nome} />
-                <h3>{game.nome}</h3>
-                <p>{game.categoria}</p>
+                <img src={game.image} alt={game.nome} className="game-image" />
+                <div className="game-info">
+                  <h3>{game.nome}</h3>
+                  <div className="game-description">{game.descricao}</div>
+                  <div className="game-details">
+                    <p><strong>Créditos:</strong> {game.creditos}</p>
+                    <p><strong>Tecnologia:</strong> {game.tecnologia}</p>
+                    <p><strong>Plataforma:</strong> {game.plataforma}</p>
+                    <p><strong>Lançamento:</strong> {game.lancado}</p>
+                  </div>
+                  <div className="game-tags">
+                    {game.tags.map((tag, index) => (
+                      <span key={index} className="tag">{tag}</span>
+                    ))}
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -206,31 +270,65 @@ function Dashboard() {
         }
         .games-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-          gap: 1rem;
-          margin-top: 1rem;
+          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+          gap: 1.5rem;
         }
         .game-card {
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: 0.5rem;
-          padding: 1rem;
-          text-align: center;
+          background: rgba(19, 20, 30, 0.7);
+          border-radius: 1rem;
+          overflow: hidden;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
-        .game-card img {
+        .game-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 6px 25px rgba(104, 66, 255, 0.2);
+        }
+        .game-image {
           width: 100%;
-          height: 150px;
+          height: 180px;
           object-fit: cover;
-          border-radius: 0.25rem;
-          margin-bottom: 0.5rem;
         }
-        .game-card h3 {
-          font-family: 'Poppins', sans-serif;
-          font-weight: 600;
-          margin: 0.5rem 0;
+        .game-info {
+          padding: 1.25rem;
         }
-        .game-card p {
-          color: rgba(255, 255, 255, 0.7);
+        .game-info h3 {
+          margin: 0 0 0.75rem 0;
+          font-size: 1.2rem;
+          color: #fff;
+        }
+        .game-description {
           font-size: 0.9rem;
+          color: rgba(255, 255, 255, 0.8);
+          margin-bottom: 1rem;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+        .game-details {
+          font-size: 0.85rem;
+          color: rgba(255, 255, 255, 0.7);
+          margin-bottom: 1rem;
+        }
+        .game-details p {
+          margin: 0.25rem 0;
+        }
+        .game-details strong {
+          color: rgba(255, 255, 255, 0.9);
+        }
+        .game-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+        }
+        .tag {
+          background: rgba(104, 66, 255, 0.2);
+          color: #6842ff;
+          padding: 0.25rem 0.75rem;
+          border-radius: 1rem;
+          font-size: 0.8rem;
+          font-weight: 500;
         }
       `}</style>
     </div>
