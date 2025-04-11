@@ -85,7 +85,7 @@ export default function Produto() {
 
         <div className={styles.footer}>
           <div className={styles['footer-content']}>
-            <img width="150" src={logo} alt="More Games Logo" />
+            <img width="150" src={logo} alt="More Games Logo" draggable="false" />
             <div className={styles['footer-links']}>
               <Link to="/privacidade" className={styles['footer-link']}>Política de privacidade</Link>
               <Link to="/contacto" className={styles['footer-link']}>Contato</Link>

@@ -15,10 +15,10 @@ function Navbar({ setSearchQuery }) {
   return (
     <div className="navbar">
       <Link to="/" className="logo-container">
-        <img src={logo} alt="Logo" className="logo" />
+        <img src={logo} alt="Logo" className="logo" draggable="false" />
       </Link>
       <div className="searchbar">
-        <img src={favicon} alt="Search icon" className="search-icon" />
+        <img src={favicon} alt="Search icon" className="search-icon" draggable="false" />
         <input
           type="text"
           placeholder="O que quer jogar hoje..."

@@ -174,7 +174,7 @@ function Dashboard() {
           <div className="games-grid">
             {games.map(game => (
               <div key={game.id} className="game-card">
-                <img src={game.image} alt={game.nome} className="game-image" />
+                <img src={game.image} alt={game.nome} className="game-image" draggable="false" />
                 <div className="game-info">
                   <h3>{game.nome}</h3>
                   <div className="game-description">{game.descricao}</div>

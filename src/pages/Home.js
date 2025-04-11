@@ -34,6 +34,7 @@ function Home({ searchQuery }) {
                 src={produto.image}
                 alt={produto.nome}
                 className="produto-image"
+                draggable="false"
               />
               <marquee id="namer" className="text-xl font-bold text-overlay">
                 {produto.nome}
