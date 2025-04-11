@@ -1,12 +1,35 @@
 import { Link, useParams } from "react-router-dom";
-import produtos from "./produtos";
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { useState, useEffect } from 'react';
 import logo from '../imgs/logo.png';
 import styles from './Produto.module.css';
 
 export default function Produto() {
     const { id } = useParams();
-    const produto = produtos.find((p) => p.id === parseInt(id));
-  
+    const [produto, setProduto] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const db = getFirestore();
+
+    useEffect(() => {
+        const fetchProduto = async () => {
+            try {
+                const docRef = doc(db, 'games', id);
+                const docSnap = await getDoc(docRef);
+                
+                if (docSnap.exists()) {
+                    setProduto({ id: docSnap.id, ...docSnap.data() });
+                }
+                setLoading(false);
+            } catch (error) {
+                console.error('Erro ao carregar o jogo:', error);
+                setLoading(false);
+            }
+        };
+        
+        fetchProduto();
+    }, [id, db]);
+
+    if (loading) return <div>Carregando...</div>;
     if (!produto) return <p>Produto não encontrado.</p>;
   
     return (
@@ -15,7 +38,10 @@ export default function Produto() {
           src={produto.link} 
           className={styles['game-frame']} 
           frameBorder="0" 
-          allow="gamepad *;"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; gamepad *;"
+          allowFullScreen
+          loading="lazy"
+          title={produto.nome}
         ></iframe>
 
         <div className={styles['info-container']}>

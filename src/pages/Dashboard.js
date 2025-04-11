@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import produtos from './produtos';
+import { getFirestore, collection, getDocs, addDoc, doc, deleteDoc } from 'firebase/firestore';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 function Dashboard() {
   const [newGame, setNewGame] = useState({
@@ -14,8 +17,25 @@ function Dashboard() {
     lancado: '',
     link: ''
   });
-  const [games, setGames] = useState(produtos);
+  const [games, setGames] = useState([]);
   const navigate = useNavigate();
+  const db = getFirestore();
+
+  useEffect(() => {
+    const fetchGames = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'games'));
+        const gamesData = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setGames(gamesData);
+      } catch (error) {
+        console.error('Erro ao carregar jogos:', error);
+      }
+    };
+    fetchGames();
+  }, [db]);
 
   useEffect(() => {
     const isAuthenticated = localStorage.getItem('isAuthenticated');
@@ -37,25 +57,47 @@ function Dashboard() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const newId = games.length + 1;
-    const gameToAdd = {
-      ...newGame,
-      id: newId
-    };
-    setGames(prev => [...prev, gameToAdd]);
-    setNewGame({
-      nome: '',
-      image: '',
-      descricao: '',
-      creditos: '',
-      tags: [],
-      tecnologia: '',
-      plataforma: '',
-      lancado: '',
-      link: ''
-    });
+    try {
+      const docRef = await addDoc(collection(db, 'games'), {
+        ...newGame,
+        createdAt: new Date()
+      });
+      const gameToAdd = {
+        ...newGame,
+        id: docRef.id
+      };
+      setGames(prev => [...prev, gameToAdd]);
+      setNewGame({
+        nome: '',
+        image: '',
+        descricao: '',
+        creditos: '',
+        tags: [],
+        tecnologia: '',
+        plataforma: '',
+        lancado: '',
+        link: ''
+      });
+      toast.success('Jogo adicionado com sucesso!');
+    } catch (error) {
+      console.error('Erro ao adicionar jogo:', error);
+      toast.error('Erro ao adicionar jogo. Tente novamente.');
+    }
+  };
+
+  const handleDelete = async (gameId) => {
+    if (window.confirm('Tem certeza que deseja excluir este jogo?')) {
+      try {
+        await deleteDoc(doc(db, 'games', gameId));
+        setGames(prev => prev.filter(game => game.id !== gameId));
+        toast.success('Jogo excluído com sucesso!');
+      } catch (error) {
+        console.error('Erro ao excluir jogo:', error);
+        toast.error('Erro ao excluir jogo. Tente novamente.');
+      }
+    }
   };
 
   return (
@@ -189,12 +231,19 @@ function Dashboard() {
                       <span key={index} className="tag">{tag}</span>
                     ))}
                   </div>
+                  <button
+                    onClick={() => handleDelete(game.id)}
+                    className="delete-button"
+                  >
+                    Excluir
+                  </button>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </div>
+      <ToastContainer position="bottom-right" />
 
       <style jsx>{`
         .dashboard-container {

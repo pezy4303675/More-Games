@@ -10,6 +10,17 @@ import Privacidade from './pages/Privacidade';
 import Contacto from './pages/Contacto';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
+import { initializeApp } from 'firebase/app';
+
+const firebaseApp = initializeApp( {
+  apiKey: "AIzaSyDbiHiwceuMS6x0zybmYMVL_Do7h4IYTuE",
+  authDomain: "gameslint.firebaseapp.com",
+  projectId: "gameslint",
+  storageBucket: "gameslint.firebasestorage.app",
+  messagingSenderId: "103155088844",
+  appId: "1:103155088844:web:d9d31d4eefacbdfe5e7169",
+  measurementId: "G-Q2LVWV74BR"
+});
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
