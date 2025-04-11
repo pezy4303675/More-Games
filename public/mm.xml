@@ -8,25 +8,23 @@
     <priority>1.0</priority>
   </url>
 
-  <!-- Página do Produto 1 -->
+ <url>
+    <loc>https://moregamess.vercel.app/privacidade</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+   <url>
+    <loc>https://moregamess.vercel.app/contacto</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Páginas de Produtos -->
   <url>
     <loc>https://moregamess.vercel.app/produto/1</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Página de Privacidade -->
-  <url>
-    <loc>https://moregamess.vercel.app/privacidade</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-
-  <!-- Página de Contacto -->
-  <url>
-    <loc>https://moregamess.vercel.app/contacto</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.8</priority>
   </url>
 
 </urlset>
