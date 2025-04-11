@@ -107,14 +107,15 @@ transform: scale(1.05);
   
 
   .gamesitem {
-    width: 100%;
-    aspect-ratio: 1;
+    width: 250px;
+    height: 250px;
     position: relative;
     overflow: hidden;
     border-radius: 1rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
     cursor: pointer;
+    margin: 0 auto;
   }
 
   .gamesitem:hover {
@@ -320,14 +321,15 @@ color: rgba(255, 255, 255, 0.81);
   
 
   .gamesitem {
-    width: 100%;
-    aspect-ratio: 1;
+    width: 250px;
+    height: 250px;
     position: relative;
     overflow: hidden;
     border-radius: 1rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
     cursor: pointer;
+    margin: 0 auto;
   }
 
   .gamesitem:hover {
@@ -533,14 +535,15 @@ color: rgba(255, 255, 255, 0.81);
   
 
   .gamesitem {
-    width: 100%;
-    aspect-ratio: 1;
+    width: 250px;
+    height: 250px;
     position: relative;
     overflow: hidden;
     border-radius: 1rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
     cursor: pointer;
+    margin: 0 auto;
   }
 
   .gamesitem:hover {
@@ -746,14 +749,15 @@ color: rgba(255, 255, 255, 0.81);
   
 
   .gamesitem {
-    width: 100%;
-    aspect-ratio: 1;
+    width: 250px;
+    height: 250px;
     position: relative;
     overflow: hidden;
     border-radius: 1rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
     cursor: pointer;
+    margin: 0 auto;
   }
 
   .gamesitem:hover {
@@ -959,14 +963,15 @@ color: rgba(255, 255, 255, 0.81);
   
 
   .gamesitem {
-    width: 100%;
-    aspect-ratio: 1;
+    width: 250px;
+    height: 250px;
     position: relative;
     overflow: hidden;
     border-radius: 1rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
     cursor: pointer;
+    margin: 0 auto;
   }
 
   .gamesitem:hover {
@@ -1172,14 +1177,15 @@ color: rgba(255, 255, 255, 0.81);
   
 
   .gamesitem {
-    width: 100%;
-    aspect-ratio: 1;
+    width: 250px;
+    height: 250px;
     position: relative;
     overflow: hidden;
     border-radius: 1rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
     cursor: pointer;
+    margin: 0 auto;
   }
 
   .gamesitem:hover {
@@ -1385,14 +1391,15 @@ color: rgba(255, 255, 255, 0.81);
   
 
   .gamesitem {
-    width: 100%;
-    aspect-ratio: 1;
+    width: 250px;
+    height: 250px;
     position: relative;
     overflow: hidden;
     border-radius: 1rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
     cursor: pointer;
+    margin: 0 auto;
   }
 
   .gamesitem:hover {
@@ -1598,14 +1605,15 @@ color: rgba(255, 255, 255, 0.81);
   
 
   .gamesitem {
-    width: 100%;
-    aspect-ratio: 1;
+    width: 250px;
+    height: 250px;
     position: relative;
     overflow: hidden;
     border-radius: 1rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
     cursor: pointer;
+    margin: 0 auto;
   }
 
   .gamesitem:hover {
@@ -1811,14 +1819,15 @@ color: rgba(255, 255, 255, 0.81);
   
 
   .gamesitem {
-    width: 100%;
-    aspect-ratio: 1;
+    width: 250px;
+    height: 250px;
     position: relative;
     overflow: hidden;
     border-radius: 1rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
     cursor: pointer;
+    margin: 0 auto;
   }
 
   .gamesitem:hover {
@@ -2024,14 +2033,15 @@ color: rgba(255, 255, 255, 0.81);
   
 
   .gamesitem {
-    width: 100%;
-    aspect-ratio: 1;
+    width: 250px;
+    height: 250px;
     position: relative;
     overflow: hidden;
     border-radius: 1rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
     cursor: pointer;
+    margin: 0 auto;
   }
 
   .gamesitem:hover {
