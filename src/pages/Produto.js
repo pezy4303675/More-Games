@@ -115,6 +115,7 @@ export default function Produto() {
             <div className={styles['footer-links']}>
               <Link to="/privacidade" className={styles['footer-link']}>Política de privacidade</Link>
               <Link to="/contacto" className={styles['footer-link']}>Contato</Link>
+              <Link to="/sobre" className={styles['footer-link']}>Sobre</Link>
             </div>
           </div>
           <h3 className={styles.copyright}>© 2025 More Games. Todos direitos reservados.</h3>
