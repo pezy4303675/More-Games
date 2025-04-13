@@ -44,22 +44,6 @@ function Home({ searchQuery }) {
     }
   }, [searchQuery, produtos]);
 
-
-  // ⬇️ Injeta o script no final da página
-  useEffect(() => {
-    if (!loading && filteredProducts.length > 0 && scriptContainerRef.current) {
-      const script = document.createElement('script');
-      script.src = "//racuchica.com/b/XxVRs.dXGdlS0xYUWzcJ/-ermF9fujZAUslRkUP/T/Y/y-NujDc/zDNVTFYdtbNpj/IO2FNbz/Mt1PNwwn";
-      script.async = true;
-      script.referrerPolicy = 'no-referrer-when-downgrade';
-      scriptContainerRef.current.appendChild(script);
-
-      return () => {
-        script.remove();
-      };
-    }
-  }, [loading, filteredProducts]);
-
   if (loading) return <div>Carregando...</div>;
   if (error) return <div>{error}</div>;
 
@@ -90,7 +74,6 @@ function Home({ searchQuery }) {
           </div>
         ))}
       </div>
-      <div ref={scriptContainerRef}></div>
     </div>
   );
 }
