@@ -76,6 +76,7 @@ function Home({ searchQuery }) {
           </div>
         ))}
       </div>
+
       <div className={styles['info-container']}>
         <h1 className={styles['game-title']}>Posts Recentes</h1>
         
