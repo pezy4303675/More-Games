@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { posts } from "./posts";
 import styles from './Produto.module.css';
+import  LinesEllipsis  from  'react-lines-ellipsis'
+
 
 function Comunidade() {
   const [postsList, setPostsList] = useState([]);
@@ -75,7 +77,7 @@ function Comunidade() {
                         {new Date(post.date).toLocaleDateString('pt-BR')}
                       </span>
                     </div>
-                    <p className={styles['post-description']}>{post.description}</p>
+                    <LinesEllipsis  maxLine = '1' ellipsis = '...' text={post.description}  className={styles['post-description']} />
                   </div>
                 </div>
               </Link>
