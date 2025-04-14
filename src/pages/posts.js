@@ -19,6 +19,14 @@ tags: ["Free Fire", "Token Royale", "Menu Royale", "Diamante Royale", "Arma Roya
     author: "Daniel Nunes",
     description: `Se você curte RPGs de fantasia, com mundos vastos e magia explodindo na tela, Avowed provavelmente já está no seu radar. O novo jogo da Obsidian Entertainment veio com tudo, prometendo ser um concorrente de peso para os gigantes do gênero, como Skyrim e Baldur’s Gate 3. Mas o que faz Avowed ser tão diferente e especial? Bora mergulhar nesse universo e entender por que esse game já está conquistando uma legião de fãs!`,
 tags: ["RPG", "fantasia", "Avowed", "Obsidian Entertainment", "Skyrim", "Baldur's Gate 3", "jogos de RPG", "gameplay", "magia", "mundo aberto", "jogos de fantasia", "lançamento de jogos", "games 2025", "RPG de ação", "universo de fantasia"]
+  },{
+    id: 3,
+    nome: "🛹 Tony Hawk’s Pro Skater 3 + 4",
+    image: "https://i.ytimg.com/vi/D-PedsiljOc/maxresdefault.jpg",
+    date: "2025-04-16",
+    author: "Daniel Nunes",
+    description: `🛹 Tony Hawk’s Pro Skater 3 + 4 chegou com tudo! O remake dos clássicos do skate traz gráficos insanos, jogabilidade refinada e até a skatista brasileira Rayssa Leal entre os novos personagens. Perfeito pra quem curte manobras, nostalgia e aquela vibe dos anos 2000 com cara de nova geração. Já testou essa lenda? 🎮 Disponível para PC, PS5 e Xbox Series.`,
+tags: ["skate", "jogos", "remake", "tonyhawk", "rayssaleal", "nostálgico", "ps5", "xboxseries", "pcgamer", "gameplay", "culturaurbana", "game2025"]
   },
 
 ]
