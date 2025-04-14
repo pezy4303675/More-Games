@@ -76,9 +76,6 @@ function Home({ searchQuery }) {
           </div>
         ))}
       </div>
-      <script async="async" data-cfasync="false" src="//pl26352511.profitableratecpm.com/a96b05239a81b8fdd6c3c31c19786788/invoke.js"></script>
-      <div id="container-a96b05239a81b8fdd6c3c31c19786788"></div>
-
       <div className={styles['info-container']}>
         <h1 className={styles['game-title']}>Posts Recentes</h1>
         
@@ -115,6 +112,10 @@ function Home({ searchQuery }) {
             </div>
           ))}
         </div>
+
+        <script async="async" data-cfasync="false" src="//pl26352511.profitableratecpm.com/a96b05239a81b8fdd6c3c31c19786788/invoke.js"></script>
+        <div id="container-a96b05239a81b8fdd6c3c31c19786788"></div>
+
       </div>
     </div>
   );
