@@ -44,22 +44,34 @@ export default function Postes() {
               style={{ width: '100%', height: 'auto', maxHeight: '400px' }}
               loading="lazy"
             />
-            
-            <div className={styles['post-meta']}>
-              <span className={styles['info-label']}>Autor:</span>
+            <br/>
+            <div className={styles['info-item']}>
+              <span className={styles['info-label']}>Créditos:</span>
               <span className={styles['info-value']}>{post.author}</span>
             </div>
             
-            <div className={styles['post-meta']}>
+            <div className={styles['info-item']}>
               <span className={styles['info-label']}>Data:</span>
               <span className={styles['info-value']}>
                 {new Date(post.date).toLocaleDateString('pt-BR')}
               </span>
             </div>
 
-            <div className={styles['description']}>
-              {post.description}
+            <div className={styles['info-item']}>
+              <span className={styles['info-label']}>Descrição:</span>
+              <span className={styles['info-value']}>{post.description}</span>
             </div>
+
+
+            <div className={styles['info-item']}>
+              <span className={styles['info-label']}>Tags:</span>
+              <div className={styles['tag-container']}>
+                {post.tags.map((tag, index) => (
+                  <span key={index} className={styles.tag}>{tag}</span>
+                ))}
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
