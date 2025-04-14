@@ -42,6 +42,52 @@ export default function Produto() {
           allowFullScreen
           loading="lazy"
           title={produto.nome}
+          onLoad={(e) => {
+            try {
+              const frame = e.target;
+              const handleMediaElements = () => {
+                try {
+                  const mediaElements = frame.contentWindow.document.querySelectorAll('video, audio');
+                  mediaElements.forEach(media => {
+                    // Adiciona listeners para controlar o estado de reprodução
+                    media.addEventListener('play', () => {
+                      media.playbackRate = 1;
+                      media.volume = 1;
+                    });
+
+                    media.addEventListener('error', (error) => {
+                      console.log('Erro de mídia:', error);
+                      media.load(); // Recarrega o elemento de mídia em caso de erro
+                    });
+
+                    // Previne interrupções automáticas
+                    media.addEventListener('pause', (event) => {
+                      if (!event.isTrusted) {
+                        media.play().catch(() => {
+                          console.log('Não foi possível retomar a reprodução');
+                        });
+                      }
+                    });
+                  });
+                } catch (mediaErr) {
+                  console.log('Erro ao configurar elementos de mídia:', mediaErr);
+                }
+              };
+
+              // Configura os elementos de mídia após o carregamento do iframe
+              handleMediaElements();
+
+              // Observa mudanças no conteúdo do iframe
+              const observer = new MutationObserver(handleMediaElements);
+              observer.observe(frame.contentWindow.document.body, {
+                childList: true,
+                subtree: true
+              });
+
+            } catch (err) {
+              console.log('Erro ao acessar iframe:', err);
+            }
+          }}
         ></iframe>
 
         <div className={styles['info-container']}>

@@ -1,50 +1,39 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
-import { posts } from './posts';
+import { posts } from "./posts";
 import styles from './Produto.module.css';
 
-function Home({ searchQuery }) {
-  const [produtos, setProdutos] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
+function Comunidade() {
+  const [postsList, setPostsList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Busca os produtos do Firestore
   useEffect(() => {
-    const fetchProdutos = async () => {
+    const loadPosts = () => {
       try {
-        const db = getFirestore();
-        const produtosCollection = collection(db, 'games');
-        const produtosSnapshot = await getDocs(produtosCollection);
-        const produtosList = produtosSnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
-        setProdutos(produtosList);
-        setFilteredProducts(produtosList);
+        if (!Array.isArray(posts) || !posts.every(post => 
+          post && 
+          typeof post === 'object' && 
+          'id' in post && 
+          'nome' in post && 
+          'image' in post && 
+          'date' in post && 
+          'author' in post && 
+          'description' in post
+        )) {
+          throw new Error('Formato dos posts inválido');
+        }
+        setPostsList(posts);
         setLoading(false);
       } catch (err) {
-        console.error('Erro ao carregar os jogos:', err);
-        setError('Erro ao carregar os jogos. Por favor, tente novamente mais tarde.');
+        console.error('Erro ao carregar os posts:', err);
+        setError('Erro ao carregar os posts. Por favor, tente novamente mais tarde.');
         setLoading(false);
       }
     };
 
-    fetchProdutos();
+    loadPosts();
   }, []);
-
-  // Filtra os produtos com base na pesquisa
-  useEffect(() => {
-    if (searchQuery) {
-      const filtered = produtos.filter((produto) =>
-        produto.nome.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      setFilteredProducts(filtered);
-    } else {
-      setFilteredProducts(produtos);
-    }
-  }, [searchQuery, produtos]);
 
   if (loading) return <div>Carregando...</div>;
   if (error) return <div>{error}</div>;
@@ -57,33 +46,10 @@ function Home({ searchQuery }) {
         </ul>
       </div>
       <br/>
-      <div className="games">
-        {filteredProducts.map((produto) => (
-          <div className="gamesitem" key={produto.id}>
-            <Link to={`/produto/${produto.id}`} className="product-container">
-              <div className="image-container">
-                <img
-                  src={produto.image}
-                  alt={produto.nome}
-                  className="produto-image"
-                  draggable="false"
-                />
-                <marquee id="namer" className="text-xl font-bold text-overlay">
-                  {produto.nome}
-                </marquee>
-              </div>
-            </Link>
-          </div>
-        ))}
-      </div>
-      <script async="async" data-cfasync="false" src="//pl26352511.profitableratecpm.com/a96b05239a81b8fdd6c3c31c19786788/invoke.js"></script>
-      <div id="container-a96b05239a81b8fdd6c3c31c19786788"></div>
-
       <div className={styles['info-container']}>
-        <h1 className={styles['game-title']}>Posts Recentes</h1>
-        
+        <h1 className={styles['game-title']}>Posts da Comunidade</h1>
         <div className={styles['info-section']}>
-          {posts.map((post) => (
+          {postsList.map((post) => (
             <div key={post.id} className={styles['info-item']}>
               <Link to={`/postes/${post.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <div className={styles['post-content']}>
@@ -109,6 +75,7 @@ function Home({ searchQuery }) {
                         {new Date(post.date).toLocaleDateString('pt-BR')}
                       </span>
                     </div>
+                    <p className={styles['post-description']}>{post.description}</p>
                   </div>
                 </div>
               </Link>
@@ -120,4 +87,4 @@ function Home({ searchQuery }) {
   );
 }
 
-export default Home;
+export default Comunidade;

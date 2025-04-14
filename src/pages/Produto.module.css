@@ -47,24 +47,56 @@
 
 .info-item {
   display: flex;
-  align-items: center;
-  margin-bottom: 0.8rem;
-  transition: transform 0.2s ease;
+  flex-direction: column;
+  background: rgba(19, 20, 30, 0.9);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(104, 66, 255, 0.1);
 }
 
 .info-item:hover {
-  transform: translateX(5px);
+  transform: translateY(-5px);
+  border-color: rgba(104, 66, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(104, 66, 255, 0.1);
+}
+
+.post-content {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.post-image {
+  width: 200px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.post-details {
+  flex: 1;
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
 }
 
 .info-label {
   color: rgba(255, 255, 255, 0.7);
-  width: 120px;
+  width: 80px;
   font-weight: 500;
+  font-size: 0.9rem;
 }
 
 .info-value {
   color: #fff;
   flex: 1;
+  font-size: 0.9rem;
 }
 
 .tag-container {
@@ -141,6 +173,10 @@
   text-align: center;
   color: rgba(255, 255, 255, 0.5);
   margin-top: 1rem;
+}
+
+.post-description{
+  color: rgba(255, 255, 255, 0.477);
 }
 
 @keyframes fadeIn {

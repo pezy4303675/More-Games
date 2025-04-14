@@ -12,6 +12,8 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import { initializeApp } from 'firebase/app';
 import Sobre from './pages/Sobre';
+import Comunidade from './pages/Comunidade';
+import Postes from './pages/Postes';
 
 const firebaseApp = initializeApp( {
   apiKey: "AIzaSyDbiHiwceuMS6x0zybmYMVL_Do7h4IYTuE",
@@ -36,8 +38,10 @@ function App() {
           <Route path='/privacidade' element={<Privacidade/>}/>
           <Route path='/contacto' element={<Contacto/>}/>
           <Route path="/produto/:id" element={<Produto />} />
+          <Route path="/postes/:id" element={<Postes />} />
           <Route path="/login" element={<Login />} />
           <Route path="/sobre" element={<Sobre />} />
+          <Route path="/comunidade" element={<Comunidade />} />
           <Route path="/dashboard" element={
             localStorage.getItem('isAuthenticated') ? 
             <Dashboard /> : 
