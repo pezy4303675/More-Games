@@ -21,4 +21,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+
+ <!-- Página de Sobre -->
+  <url>
+    <loc>https://moregamess.vercel.app/sobre</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>
