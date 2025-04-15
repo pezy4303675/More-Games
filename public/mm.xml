@@ -8,6 +8,13 @@
     <priority>1.0</priority>
   </url>
 
+   <!-- Página Comunidade -->
+  <url>
+    <loc>https://moregamess.vercel.app/comunidade</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
   <!-- Página de Política de Privacidade -->
   <url>
     <loc>https://moregamess.vercel.app/privacidade</loc>
