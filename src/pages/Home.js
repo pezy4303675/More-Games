@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import { posts } from './posts';
 import styles from './Produto.module.css';
+import Anuncio from "./Anuncio";
 
 function Home({ searchQuery }) {
   const [produtos, setProdutos] = useState([]);
@@ -77,6 +78,10 @@ function Home({ searchQuery }) {
         ))}
       </div>
 
+      <div id="container-a96b05239a81b8fdd6c3c31c19786788"></div>
+<script src="anuncio.js"></script>
+
+
       <div className={styles['info-container']}>
         <h1 className={styles['game-title']}>Posts Recentes</h1>
         
@@ -113,10 +118,6 @@ function Home({ searchQuery }) {
             </div>
           ))}
         </div>
-
-        <script async="async" data-cfasync="false" src="//pl26352511.profitableratecpm.com/a96b05239a81b8fdd6c3c31c19786788/invoke.js"></script>
-        <div id="container-a96b05239a81b8fdd6c3c31c19786788"></div>
-
       </div>
     </div>
   );
