@@ -1,4 +1,4 @@
-import { Home, StickyNote } from "lucide-react";
+import { Home, StickyNote, Gamepad2 } from "lucide-react";
 
 
 export const NavbarData = [
@@ -12,7 +12,7 @@ export const NavbarData = [
         }
         ,
     {
-        icon:<button><StickyNote strokeWidth={3} className="text-[#0ca1ff]" /></button>,
+        icon:<button><Gamepad2 strokeWidth={3} className="text-[#0ca1ff]" /></button>,
         link:'/pagames'
         }
     ]
