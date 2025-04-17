@@ -10,4 +10,9 @@ export const NavbarData = [
         icon:<button><StickyNote strokeWidth={3} className="text-[#0ca1ff]" /></button>,
         link:'/comunidade'
         }
+        ,
+    {
+        icon:<button><StickyNote strokeWidth={3} className="text-[#0ca1ff]" /></button>,
+        link:'/pagames'
+        }
     ]

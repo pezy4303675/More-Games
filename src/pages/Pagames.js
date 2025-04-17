@@ -1,40 +1,39 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { posts } from "./posts";
+import { jogosdown } from './jogosdown';
+import { Link } from 'react-router-dom';
+import LinesEllipsis from 'react-lines-ellipsis';
 import styles from './Produto.module.css';
-import  LinesEllipsis  from  'react-lines-ellipsis'
 
-
-function Comunidade() {
-  const [postsList, setPostsList] = useState([]);
+function Pagames() {
+  const [jogosList, setJogosList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const loadPosts = () => {
+    const loadJogos = () => {
       try {
-        if (!Array.isArray(posts) || !posts.every(post => 
-          post && 
-          typeof post === 'object' && 
-          'id' in post && 
-          'nome' in post && 
-          'image' in post && 
-          'date' in post && 
-          'author' in post && 
-          'description' in post
+        if (!Array.isArray(jogosdown) || !jogosdown.every(jogo => 
+          jogo && 
+          typeof jogo === 'object' && 
+          'id' in jogo && 
+          'nome' in jogo && 
+          'image' in jogo && 
+          'date' in jogo && 
+          'author' in jogo && 
+          'description' in jogo
         )) {
-          throw new Error('Formato dos posts inválido');
+          throw new Error('Formato dos jogos inválido');
         }
-        setPostsList(posts);
+        setJogosList(jogosdown);
         setLoading(false);
       } catch (err) {
-        console.error('Erro ao carregar os posts:', err);
-        setError('Erro ao carregar os posts. Por favor, tente novamente mais tarde.');
+        console.error('Erro ao carregar os jogos:', err);
+        setError('Erro ao carregar os jogos. Por favor, tente novamente mais tarde.');
         setLoading(false);
       }
     };
 
-    loadPosts();
+    loadJogos();
   }, []);
 
   if (loading) return <div>Carregando...</div>;
@@ -51,15 +50,15 @@ function Comunidade() {
       <div id="container-a96b05239a81b8fdd6c3c31c19786788"></div>
       <br/>
       <div className={styles['info-container']}>
-        <h1 className={styles['game-title']}>Posts da Comunidade</h1>
+        <h1 className={styles['game-title']}>Jogos prontos para baixar!</h1>
         <div className={styles['info-section']}>
-          {postsList.map((post) => (
-            <div key={post.id} className={styles['info-item']}>
-              <Link to={`/postes/${post.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+          {jogosList.map((jogo) => (
+            <div key={jogo.id} className={styles['info-item']}>
+              <Link to={`/jogos/${jogo.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <div className={styles['post-content']}>
                   <img 
-                    src={post.image} 
-                    alt={post.nome} 
+                    src={jogo.image} 
+                    alt={jogo.nome} 
                     className={styles['post-image']}
                     loading="lazy"
                     onError={(e) => {
@@ -68,18 +67,18 @@ function Comunidade() {
                     }}
                   />
                   <div className={styles['post-details']}>
-                  <LinesEllipsis  maxLine = '1' ellipsis = '...' text={post.nome}  className={styles['info-header']} />
+                  <LinesEllipsis  maxLine = '1' ellipsis = '...' text={jogo.nome}  className={styles['info-header']} />
                     <div className={styles['post-meta']}>
                       <span className={styles['info-label']}>Autor:</span>
-                      <span className={styles['info-value']}>{post.author}</span>
+                      <span className={styles['info-value']}>{jogo.author}</span>
                     </div>
                     <div className={styles['post-meta']}>
                       <span className={styles['info-label']}>Data:</span>
                       <span className={styles['info-value']}>
-                        {new Date(post.date).toLocaleDateString('pt-BR')}
+                        {new Date(jogo.date).toLocaleDateString('pt-BR')}
                       </span>
                     </div>
-                    <LinesEllipsis  maxLine = '1' ellipsis = '...' text={post.description}  className={styles['post-description']} />
+                    <LinesEllipsis  maxLine = '1' ellipsis = '...' text={jogo.description}  className={styles['post-description']} />
                   </div>
                 </div>
               </Link>
@@ -91,4 +90,4 @@ function Comunidade() {
   );
 }
 
-export default Comunidade;
+export default Pagames;

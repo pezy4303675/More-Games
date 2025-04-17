@@ -179,6 +179,23 @@
   color: rgba(255, 255, 255, 0.477);
 }
 
+
+
+
+.dsdadada {
+  background: rgba(104, 66, 255, 0.2);
+  color: #6842ff;
+  padding: 1rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.dsdadada:hover {
+  background: rgba(104, 66, 255, 0.3);
+  transform: translateY(-2px);
+}
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
