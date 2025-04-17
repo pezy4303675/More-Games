@@ -15,6 +15,13 @@
     <priority>0.6</priority>
   </url>
 
+<!-- Página Jogos -->
+  <url>
+    <loc>https://moregamess.vercel.app/pagames</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+
   <!-- Página de Política de Privacidade -->
   <url>
     <loc>https://moregamess.vercel.app/privacidade</loc>
