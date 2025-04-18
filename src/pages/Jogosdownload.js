@@ -58,6 +58,11 @@ export default function Jogosdownload() {
             </div>
 
             <div className={styles['info-item']}>
+              <span className={styles['info-label']}>Tamanho:</span>
+              <span className={styles['info-value']}>{jogos.tamanho}</span>
+            </div>
+
+            <div className={styles['info-item']}>
               <span className={styles['info-label']}>Descrição:</span>
               <span className={styles['info-value']}>{jogos.description}</span>
             </div>
