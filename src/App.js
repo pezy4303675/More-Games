@@ -16,6 +16,7 @@ import Comunidade from './pages/Comunidade';
 import Postes from './pages/Postes';
 import Pagames from './pages/Pagames';
 import Jogosdownload from './pages/Jogosdownload';
+import Privacidadeflappycopter from './pages/Privacidadeflappycopter';
 
 const firebaseApp = initializeApp( {
   apiKey: "AIzaSyDbiHiwceuMS6x0zybmYMVL_Do7h4IYTuE",
@@ -42,6 +43,7 @@ function App() {
           <Route path="/produto/:id" element={<Produto />} />
           <Route path="/postes/:id" element={<Postes />} />
           <Route path="/jogos/:id" element={<Jogosdownload />} />
+          <Route path="/politicaflappycopter" element={<Privacidadeflappycopter />} />
           <Route path="/login" element={<Login />} />
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/comunidade" element={<Comunidade />} />
