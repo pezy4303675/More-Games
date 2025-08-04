@@ -12,8 +12,6 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import { initializeApp } from 'firebase/app';
 import Sobre from './pages/Sobre';
-import Comunidade from './pages/Comunidade';
-import Postes from './pages/Postes';
 import Pagames from './pages/Pagames';
 import Jogosdownload from './pages/Jogosdownload';
 import Privacidadeflappycopter from './pages/Privacidadeflappycopter';
@@ -41,12 +39,10 @@ function App() {
           <Route path='/privacidade' element={<Privacidade/>}/>
           <Route path='/contacto' element={<Contacto/>}/>
           <Route path="/produto/:id" element={<Produto />} />
-          <Route path="/postes/:id" element={<Postes />} />
           <Route path="/jogos/:id" element={<Jogosdownload />} />
           <Route path="/politicaflappycopter" element={<Privacidadeflappycopter />} />
           <Route path="/login" element={<Login />} />
           <Route path="/sobre" element={<Sobre />} />
-          <Route path="/comunidade" element={<Comunidade />} />
           <Route path="/pagames" element={<Pagames />} />
           <Route path="/dashboard" element={
             localStorage.getItem('isAuthenticated') ? 

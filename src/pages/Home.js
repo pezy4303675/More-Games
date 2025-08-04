@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
-import { posts } from './posts';
 import styles from './Produto.module.css';
 import Anuncio from "./Anuncio";
 
@@ -82,43 +81,9 @@ function Home({ searchQuery }) {
 <script src="anuncio.js"></script>
 
 
-      <div className={styles['info-container']}>
-        <h1 className={styles['game-title']}>Posts Recentes</h1>
-        
-        <div className={styles['info-section']}>
-          {posts.map((post) => (
-            <div key={post.id} className={styles['info-item']}>
-              <Link to={`/postes/${post.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                <div className={styles['post-content']}>
-                  <img 
-                    src={post.image} 
-                    alt={post.nome} 
-                    className={styles['post-image']}
-                    loading="lazy"
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = 'https://via.placeholder.com/300x200?text=Imagem+não+disponível';
-                    }}
-                  />
-                  <div className={styles['post-details']}>
-                    <h2 className={styles['info-header']}>{post.nome}</h2>
-                    <div className={styles['post-meta']}>
-                      <span className={styles['info-label']}>Autor:</span>
-                      <span className={styles['info-value']}>{post.author}</span>
-                    </div>
-                    <div className={styles['post-meta']}>
-                      <span className={styles['info-label']}>Data:</span>
-                      <span className={styles['info-value']}>
-                        {new Date(post.date).toLocaleDateString('pt-BR')}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            </div>
-          ))}
-        </div>
-      </div>
+    
+      
+
     </div>
   );
 }

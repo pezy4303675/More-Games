@@ -7,11 +7,6 @@ export const NavbarData = [
     link:'/'
     },
     {
-        icon:<button><StickyNote strokeWidth={3} className="text-[#0ca1ff]" /></button>,
-        link:'/comunidade'
-        }
-        ,
-    {
         icon:<button><Gamepad2 strokeWidth={3} className="text-[#0ca1ff]" /></button>,
         link:'/pagames'
         }
