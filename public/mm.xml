@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Página Inicial -->
+  <url>
+    <loc>https://moregamess.vercel.app/</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+   <!-- Página Comunidade -->
+  <url>
+    <loc>https://moregamess.vercel.app/comunidade</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+<!-- Página Jogos -->
+  <url>
+    <loc>https://moregamess.vercel.app/pagames</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Página de Política de Privacidade -->
+  <url>
+    <loc>https://moregamess.vercel.app/privacidade</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Página de Contacto -->
+  <url>
+    <loc>https://moregamess.vercel.app/contacto</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+ <!-- Página de Sobre -->
+  <url>
+    <loc>https://moregamess.vercel.app/sobre</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+</urlset>
