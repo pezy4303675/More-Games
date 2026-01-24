@@ -12,12 +12,7 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import { initializeApp } from 'firebase/app';
 import Sobre from './pages/Sobre';
-<<<<<<< HEAD
 import Apps from './pages/Apps';
-=======
-import Pagames from './pages/Pagames';
-import Jogosdownload from './pages/Jogosdownload';
->>>>>>> 01e46419bc15adc15c2c97d2f2000ccda9cabd84
 import Privacidadeflappycopter from './pages/Privacidadeflappycopter';
 
 const firebaseApp = initializeApp( {
@@ -43,18 +38,10 @@ function App() {
           <Route path='/privacidade' element={<Privacidade/>}/>
           <Route path='/contacto' element={<Contacto/>}/>
           <Route path="/produto/:id" element={<Produto />} />
-<<<<<<< HEAD
           <Route path="/apps" element={<Apps />} />
           <Route path="/politicaflappycopter" element={<Privacidadeflappycopter />} />
           <Route path="/login" element={<Login />} />
           <Route path="/sobre" element={<Sobre />} />
-=======
-          <Route path="/jogos/:id" element={<Jogosdownload />} />
-          <Route path="/politicaflappycopter" element={<Privacidadeflappycopter />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/sobre" element={<Sobre />} />
-          <Route path="/pagames" element={<Pagames />} />
->>>>>>> 01e46419bc15adc15c2c97d2f2000ccda9cabd84
           <Route path="/dashboard" element={
             localStorage.getItem('isAuthenticated') ? 
             <Dashboard /> : 

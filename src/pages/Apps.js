@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { getFirestore, collection, getDocs, orderBy, query, updateDoc, doc, increment } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, orderBy, query } from 'firebase/firestore';
 import { Link } from 'react-router-dom';
 import LinesEllipsis from 'react-lines-ellipsis';
-import { ChevronLeft, ChevronRight, Heart, Share2 } from 'lucide-react';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import styles from './Produto.module.css';
 
 const AppItem = ({ app }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [likes, setLikes] = useState(typeof app.likes === 'number' ? app.likes : 0);
-  const [liked, setLiked] = useState(() => localStorage.getItem(`liked_app_${app.id}`) === '1');
   // Prepare slides: use slideImages if available, otherwise fallback to imagem, otherwise empty
   const slides = (app.slideImages && app.slideImages.length > 0) 
     ? app.slideImages 
@@ -24,48 +20,7 @@ const AppItem = ({ app }) => {
     setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
   };
 
-  const handleLike = async (e) => {
-    e.preventDefault();
-    try {
-      const db = getFirestore();
-      const appRef = doc(db, 'apps', app.id);
-      const change = liked ? -1 : 1;
-      setLiked(!liked);
-      setLikes(prev => Math.max(0, prev + change));
-      localStorage.setItem(`liked_app_${app.id}`, !liked ? '1' : '0');
-      await updateDoc(appRef, { likes: increment(change) });
-    } catch (err) {
-      // Revert on error
-      setLiked(liked);
-      setLikes(typeof app.likes === 'number' ? app.likes : 0);
-      localStorage.setItem(`liked_app_${app.id}`, liked ? '1' : '0');
-      console.error('Erro ao atualizar curtidas:', err);
-      toast.error('Não foi possível registrar sua curtida.');
-    }
-  };
-
-  const handleShare = async (e) => {
-    e.preventDefault();
-    try {
-      const url = `${window.location.origin}/apps#${app.id}`;
-      const shareData = {
-        title: app.titulo || 'App',
-        text: app.conteudo ? `${app.titulo} — ${app.conteudo.slice(0, 100)}...` : app.titulo,
-        url: app.downloadLink || url
-      };
-      if (navigator.share) {
-        await navigator.share(shareData);
-      } else if (navigator.clipboard) {
-        await navigator.clipboard.writeText(shareData.url);
-        toast.success('Link copiado para a área de transferência!');
-      } else {
-        window.prompt('Copie o link do app:', shareData.url);
-      }
-    } catch (err) {
-      console.error('Erro ao compartilhar:', err);
-      toast.error('Não foi possível compartilhar.');
-    }
-  };
+  
 
   return (
     <div id={app.id} className={styles['info-item']} style={{marginBottom: '2rem', paddingBottom: '1rem', borderBottom: '1px solid rgba(255,255,255,0.1)'}}>
@@ -184,43 +139,7 @@ const AppItem = ({ app }) => {
             <div className={styles['post-description']} style={{color: '#ddd', whiteSpace: 'pre-wrap', marginBottom: '1rem'}}>
                 {app.conteudo}
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
-              <button 
-                onClick={handleLike}
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                  padding: '8px 12px',
-                  background: liked ? '#ff4d6d' : 'rgba(255,255,255,0.12)',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '8px',
-                  cursor: 'pointer',
-                  fontWeight: 600
-                }}
-              >
-                <Heart size={18} strokeWidth={2} color="#fff" fill={liked ? '#ff4d6d' : 'none'} /> {liked ? 'Curtido' : 'Curtir'}
-              </button>
-              <span style={{ color: '#aaa', fontSize: '0.9rem' }}>{likes} curtidas</span>
-              <button 
-                onClick={handleShare}
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                  padding: '8px 12px',
-                  background: 'rgba(255,255,255,0.12)',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '8px',
-                  cursor: 'pointer',
-                  fontWeight: 600
-                }}
-              >
-                <Share2 size={18} /> Compartilhar
-              </button>
-            </div>
+            
             
             {app.downloadLink && (
                 <a 
