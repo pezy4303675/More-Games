@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { getFirestore, doc, getDoc, updateDoc, increment } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, updateDoc, increment, collection, addDoc, getDocs, query, orderBy, serverTimestamp } from 'firebase/firestore';
 import { useState, useEffect, useRef } from 'react';
 import { Heart, Eye } from 'lucide-react';
 import logo from '../imgs/logo.png';
@@ -13,6 +13,12 @@ export default function Produto() {
     const [views, setViews] = useState(0);
     const [liked, setLiked] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
+    const [avgRating, setAvgRating] = useState(0);
+    const [ratingCount, setRatingCount] = useState(0);
+    const [ratingSum, setRatingSum] = useState(0);
+    const [userRating, setUserRating] = useState(0);
+    const [comments, setComments] = useState([]);
+    const [newComment, setNewComment] = useState('');
     const db = getFirestore();
     const frameContainerRef = useRef(null);
 
@@ -38,6 +44,13 @@ export default function Produto() {
                     setLikes(typeof data.likes === 'number' ? data.likes : 0);
                     setViews(typeof data.views === 'number' ? data.views : 0);
                     setLiked(localStorage.getItem(`liked_game_${docSnap.id}`) === '1');
+                    const rSum = typeof data.ratingSum === 'number' ? data.ratingSum : 0;
+                    const rCount = typeof data.ratingCount === 'number' ? data.ratingCount : 0;
+                    setRatingSum(rSum);
+                    setRatingCount(rCount);
+                    setAvgRating(rCount > 0 ? (rSum / rCount) : 0);
+                    const storedRating = parseInt(localStorage.getItem(`rated_game_${docSnap.id}`) || '0', 10);
+                    setUserRating(storedRating);
                     const viewedKey = `viewed_game_${docSnap.id}`;
                     const sessionKey = `viewed_session_${docSnap.id}`;
                     const lastViewed = parseInt(localStorage.getItem(viewedKey) || '0', 10);
@@ -57,6 +70,15 @@ export default function Produto() {
                             sessionStorage.removeItem(sessionKey);
                             localStorage.removeItem(viewedKey);
                         }
+                    }
+                    try {
+                        const cRef = collection(db, 'games', docSnap.id, 'comments');
+                        const qRef = query(cRef, orderBy('createdAt', 'desc'));
+                        const cSnap = await getDocs(qRef);
+                        const list = cSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+                        setComments(list);
+                    } catch (e) {
+                        console.error('Erro ao carregar comentários:', e);
                     }
                 }
                 setLoading(false);
@@ -83,6 +105,50 @@ export default function Produto() {
             setLiked(liked);
             setLikes(prev => prev);
             console.error('Erro ao atualizar curtidas:', err);
+        }
+    };
+    
+    const handleRate = async (stars) => {
+        if (!produto) return;
+        try {
+            const docRef = doc(db, 'games', produto.id);
+            const prev = parseInt(localStorage.getItem(`rated_game_${produto.id}`) || '0', 10);
+            if (!prev) {
+                await updateDoc(docRef, { ratingSum: increment(stars), ratingCount: increment(1) });
+                setRatingSum(s => s + stars);
+                setRatingCount(c => c + 1);
+                setAvgRating(() => {
+                    const newSum = ratingSum + stars;
+                    const newCount = ratingCount + 1;
+                    return newCount > 0 ? (newSum / newCount) : 0;
+                });
+            } else {
+                const diff = stars - prev;
+                await updateDoc(docRef, { ratingSum: increment(diff) });
+                setRatingSum(s => s + diff);
+                setAvgRating(() => {
+                    const newSum = ratingSum + diff;
+                    return Math.max(ratingCount, 1) > 0 ? (newSum / Math.max(ratingCount, 1)) : 0;
+                });
+            }
+            setUserRating(stars);
+            localStorage.setItem(`rated_game_${produto.id}`, String(stars));
+        } catch (e) {
+            console.error('Erro ao avaliar jogo:', e);
+        }
+    };
+    
+    const handleAddComment = async (e) => {
+        e.preventDefault();
+        if (!produto || !newComment.trim()) return;
+        try {
+            const cRef = collection(db, 'games', produto.id, 'comments');
+            const data = { text: newComment.trim(), createdAt: serverTimestamp() };
+            const docRes = await addDoc(cRef, data);
+            setComments(prev => [{ id: docRes.id, text: data.text, createdAt: { seconds: Date.now()/1000 } }, ...prev]);
+            setNewComment('');
+        } catch (e) {
+            console.error('Erro ao adicionar comentário:', e);
         }
     };
 
@@ -227,6 +293,59 @@ export default function Produto() {
           <div className={styles['info-section']}>
             <h2 className={styles['info-header']}>Descrição</h2>
             <p className={styles.description}>{produto.descricao}</p>
+          </div>
+          
+          <div className={styles['info-section']}>
+            <h2 className={styles['info-header']}>Avaliação</h2>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
+              <div style={{ display: 'inline-flex', gap: '0.4rem' }}>
+                {[1,2,3,4,5].map(n => (
+                  <button
+                    key={n}
+                    onClick={() => handleRate(n)}
+                    style={{
+                      background: 'transparent',
+                      border: 'none',
+                      cursor: 'pointer',
+                      color: n <= (userRating || Math.round(avgRating)) ? '#ffd166' : '#777',
+                      fontSize: '1.4rem'
+                    }}
+                    aria-label={`Avaliar com ${n} estrela${n>1?'s':''}`}
+                  >
+                    ★
+                  </button>
+                ))}
+              </div>
+              <div style={{ color: '#fff' }}>
+                {avgRating.toFixed(1)} / 5 ({ratingCount} avaliações)
+              </div>
+            </div>
+          </div>
+          
+          <div className={styles['info-section']}>
+            <h2 className={styles['info-header']}>Comentários</h2>
+            <form onSubmit={handleAddComment} style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+              <input
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+                placeholder="Escreva um comentário..."
+                style={{ flex: 1, padding: '0.8rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.2)', color: '#fff' }}
+              />
+              <button type="submit" style={{ padding: '0.8rem 1rem', borderRadius: '8px', background: '#6842ff', color: '#fff', border: 'none', cursor: 'pointer', fontWeight: 600 }}>
+                Comentar
+              </button>
+            </form>
+            <div style={{ display: 'grid', gap: '0.75rem' }}>
+              {comments.length === 0 && <div style={{ color: '#bbb' }}>Seja o primeiro a comentar.</div>}
+              {comments.map(c => (
+                <div key={c.id} style={{ background: 'rgba(19,20,30,0.9)', borderRadius: '8px', padding: '0.75rem', border: '1px solid rgba(255,255,255,0.08)' }}>
+                  <div style={{ color: '#fff' }}>{c.text}</div>
+                  <div style={{ color: '#999', fontSize: '0.8rem', marginTop: '0.25rem' }}>
+                    {c.createdAt?.seconds ? new Date(c.createdAt.seconds * 1000).toLocaleString('pt-BR') : 'Agora'}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

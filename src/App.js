@@ -14,6 +14,9 @@ import { initializeApp } from 'firebase/app';
 import Sobre from './pages/Sobre';
 import Apps from './pages/Apps';
 import Privacidadeflappycopter from './pages/Privacidadeflappycopter';
+import Pagames from './pages/Pagames';
+import Jogosdownload from './pages/Jogosdownload';
+import AppDetalhe from './pages/AppDetalhe';
 
 const firebaseApp = initializeApp( {
   apiKey: "AIzaSyDbiHiwceuMS6x0zybmYMVL_Do7h4IYTuE",
@@ -39,6 +42,9 @@ function App() {
           <Route path='/contacto' element={<Contacto/>}/>
           <Route path="/produto/:id" element={<Produto />} />
           <Route path="/apps" element={<Apps />} />
+          <Route path="/app/:id" element={<AppDetalhe />} />
+          <Route path="/jogos" element={<Pagames />} />
+          <Route path="/jogos/:id" element={<Jogosdownload />} />
           <Route path="/politicaflappycopter" element={<Privacidadeflappycopter />} />
           <Route path="/login" element={<Login />} />
           <Route path="/sobre" element={<Sobre />} />
