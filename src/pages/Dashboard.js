@@ -5,6 +5,10 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Edit, Trash2, LogOut, Plus, Save, X, Heart, Eye } from 'lucide-react';
 
+import AddRewardForm from '../components/AddRewardForm';
+
+import RedeemCodeManager from '../components/RedeemCodeManager';
+
 function Dashboard() {
   const [activeTab, setActiveTab] = useState('games');
   
@@ -34,6 +38,10 @@ function Dashboard() {
   });
   const [newsList, setNewsList] = useState([]);
   const [editingNews, setEditingNews] = useState(null);
+
+  // Rewards State
+  const [rewards, setRewards] = useState([]);
+  const [editingReward, setEditingReward] = useState(null);
 
   const navigate = useNavigate();
   const db = getFirestore();
@@ -83,6 +91,13 @@ function Dashboard() {
             ...doc.data()
           }));
           setAnalyticsGames(gamesData);
+        } else if (activeTab === 'rewards') {
+          const querySnapshot = await getDocs(collection(db, 'rewards'));
+          const rewardsData = querySnapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+          }));
+          setRewards(rewardsData);
         }
       } catch (error) {
         console.error('Erro ao carregar dados:', error);
@@ -255,6 +270,35 @@ function Dashboard() {
       setEditingNews(null);
   };
 
+  // Rewards Handlers
+  const handleRewardDelete = async (id) => {
+    if (window.confirm('Tem certeza que deseja excluir esta recompensa?')) {
+      try {
+        await deleteDoc(doc(db, 'rewards', id));
+        setRewards(prev => prev.filter(r => r.id !== id));
+        toast.success('Recompensa excluída com sucesso!');
+      } catch (error) {
+        console.error('Erro ao excluir:', error);
+        toast.error('Erro ao excluir recompensa.');
+      }
+    }
+  };
+
+  const startEditReward = (reward) => {
+    setEditingReward(reward);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const onRewardFinish = () => {
+    setEditingReward(null);
+    // Refresh rewards list
+    const fetchRewards = async () => {
+      const querySnapshot = await getDocs(collection(db, 'rewards'));
+      setRewards(querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+    };
+    fetchRewards();
+  };
+
   return (
     <div style={{ padding: '2rem', color: 'white', maxWidth: '1200px', margin: '0 auto', fontFamily: 'Inter, sans-serif' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem', background: 'rgba(255,255,255,0.05)', padding: '1.5rem', borderRadius: '15px', backdropFilter: 'blur(10px)' }}>
@@ -297,6 +341,26 @@ function Dashboard() {
           }}
         >
           Análises
+        </button>
+        <button 
+          onClick={() => { setActiveTab('rewards'); }}
+          style={{
+            ...tabButtonStyle,
+            background: activeTab === 'rewards' ? '#6842ff' : 'rgba(255,255,255,0.1)',
+            border: activeTab === 'rewards' ? '1px solid #8b6dff' : '1px solid transparent'
+          }}
+        >
+          Gerenciar Recompensas
+        </button>
+        <button 
+          onClick={() => { setActiveTab('redeemCodes'); }}
+          style={{
+            ...tabButtonStyle,
+            background: activeTab === 'redeemCodes' ? '#6842ff' : 'rgba(255,255,255,0.1)',
+            border: activeTab === 'redeemCodes' ? '1px solid #8b6dff' : '1px solid transparent'
+          }}
+        >
+          Códigos de Resgate
         </button>
       </div>
 
@@ -403,7 +467,7 @@ function Dashboard() {
               })}
             </div>
           </div>
-        ) : (
+        ) : activeTab === 'analytics' ? (
           <div>
             <h2 style={{ marginBottom: '1.5rem', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '0.5rem' }}>Painel de Análises</h2>
             <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', marginBottom: '2rem' }}>
@@ -478,7 +542,43 @@ function Dashboard() {
               </div>
             </div>
           </div>
-        )}
+        ) : activeTab === 'rewards' ? (
+          <div>
+            <div style={{ marginBottom: '3rem' }}>
+              <AddRewardForm rewardToEdit={editingReward} onFinish={onRewardFinish} />
+            </div>
+
+            <h2 style={{ marginBottom: '1.5rem', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '0.5rem' }}>Recompensas Cadastradas ({rewards.length})</h2>
+            <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))' }}>
+              {rewards.map(reward => (
+                <div key={reward.id} style={cardStyle}>
+                  <img src={reward.image} alt={reward.title} style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '10px 10px 0 0' }} />
+                  <div style={{ padding: '1rem' }}>
+                    <h3 style={{ margin: '0 0 0.5rem 0', fontSize: '1.2rem' }}>{reward.title}</h3>
+                    <p style={{ color: '#aaa', fontSize: '0.9rem', marginBottom: '0.5rem' }}>{reward.value}</p>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem', fontSize: '0.8rem', color: '#ccc' }}>
+                      <span>Custo: {reward.requiredHours}h</span>
+                      <span>Estoque: {reward.availableCount}</span>
+                    </div>
+                    <div style={{ display: 'flex', gap: '0.5rem' }}>
+                        <button onClick={() => startEditReward(reward)} style={{...actionButtonStyle, background: '#4CAF50'}}>
+                            <Edit size={16} /> Editar
+                        </button>
+                        <button onClick={() => handleRewardDelete(reward.id)} style={{...actionButtonStyle, background: '#ff4444'}}>
+                            <Trash2 size={16} /> Excluir
+                        </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : activeTab === 'redeemCodes' ? (
+          <div>
+            <h2 style={{ marginBottom: '1.5rem', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '0.5rem' }}>Gerenciar Códigos de Resgate</h2>
+            <RedeemCodeManager />
+          </div>
+        ) : null}
       </div>
     </div>
   );

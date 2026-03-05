@@ -1,22 +1,30 @@
-import Home from './pages/Home';
-import { useState, useEffect } from 'react';
-import './App.css';
-import './index'
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { initializeApp } from 'firebase/app';
+
+import './App.css';
+import './index';
+
+// Layout
 import Container from './layout/Container';
 import Navbar from './layout/Navbar';
-import Produto from './pages/Produto';
-import Privacidade from './pages/Privacidade';
-import Contacto from './pages/Contacto';
-import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
-import { initializeApp } from 'firebase/app';
-import Sobre from './pages/Sobre';
-import Apps from './pages/Apps';
-import Privacidadeflappycopter from './pages/Privacidadeflappycopter';
-import Pagames from './pages/Pagames';
-import Jogosdownload from './pages/Jogosdownload';
+
+// Pages
 import AppDetalhe from './pages/AppDetalhe';
+import Apps from './pages/Apps';
+import Contacto from './pages/Contacto';
+import Dashboard from './pages/Dashboard';
+import Home from './pages/Home';
+import Jogosdownload from './pages/Jogosdownload';
+import Login from './pages/Login';
+import Pagames from './pages/Pagames';
+import Privacidade from './pages/Privacidade';
+import Privacidadeflappycopter from './pages/Privacidadeflappycopter';
+import Produto from './pages/Produto';
+import Rewards from './pages/Rewards';
+import Sobre from './pages/Sobre';
+import TimeTracker from './components/TimeTracker';
+import Redeem from './pages/Redeem';
 
 const firebaseApp = initializeApp( {
   apiKey: "AIzaSyDbiHiwceuMS6x0zybmYMVL_Do7h4IYTuE",
@@ -33,6 +41,7 @@ function App() {
 
   return (
     <Router>
+      <TimeTracker />
       <div className='Appitem'>
       <Navbar setSearchQuery={setSearchQuery}/>
       <Container>
@@ -48,6 +57,8 @@ function App() {
           <Route path="/politicaflappycopter" element={<Privacidadeflappycopter />} />
           <Route path="/login" element={<Login />} />
           <Route path="/sobre" element={<Sobre />} />
+          <Route path="/rewards" element={<Rewards />} />
+          <Route path="/redeem" element={<Redeem />} />
           <Route path="/dashboard" element={
             localStorage.getItem('isAuthenticated') ? 
             <Dashboard /> : 
