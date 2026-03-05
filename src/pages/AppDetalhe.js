@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { getFirestore, doc, getDoc, updateDoc, increment, collection, addDoc, getDocs, query, orderBy, serverTimestamp } from 'firebase/firestore';
+import { doc, getDoc, updateDoc, increment, collection, addDoc, getDocs, query, orderBy, serverTimestamp } from 'firebase/firestore';
+import { db } from '../firebase';
 import { Heart, ChevronLeft, ChevronRight } from 'lucide-react';
 import styles from './Produto.module.css';
 import logo from '../imgs/logo.png';
 
 export default function AppDetalhe() {
   const { id } = useParams();
-  const db = getFirestore();
   const [app, setApp] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

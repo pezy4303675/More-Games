@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { getFirestore, collection, getDocs, doc, updateDoc, getDoc, onSnapshot } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
+import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
+import { db } from '../firebase';
 import styles from './Rewards.module.css';
 
 function Rewards() {
   const [rewards, setRewards] = useState([]);
   const [userTime, setUserTime] = useState(parseInt(localStorage.getItem('timeOnSite') || '0', 10));
   const [lastRedeemedCode, setLastRedeemedCode] = useState(null);
-  const auth = getAuth();
-  const db = getFirestore();
 
   useEffect(() => {
     const fetchRewards = async () => {
@@ -20,29 +18,14 @@ function Rewards() {
 
     fetchRewards();
 
-    // Se o usuário estiver logado, escuta o Firestore
-    const user = auth.currentUser;
-    if (user) {
-      const userRef = doc(db, 'users', user.uid);
-      const unsubscribe = onSnapshot(userRef, (doc) => {
-        if (doc.exists()) {
-          const dbTime = doc.data().timeOnSite || 0;
-          setUserTime(dbTime);
-          localStorage.setItem('timeOnSite', dbTime); // Mantém local em sincronia
-        }
-      });
-      return () => unsubscribe();
-    } else {
-      // Se não estiver logado, atualiza o tempo local a cada 30 segundos na tela
-      const interval = setInterval(() => {
-        setUserTime(parseInt(localStorage.getItem('timeOnSite') || '0', 10));
-      }, 30000);
-      return () => clearInterval(interval);
-    }
-  }, [auth, db]);
+    // Atualiza o tempo local a cada 30 segundos na tela
+    const interval = setInterval(() => {
+      setUserTime(parseInt(localStorage.getItem('timeOnSite') || '0', 10));
+    }, 30000);
+    return () => clearInterval(interval);
+  }, []);
 
   const handleRedeem = async (reward) => {
-    const user = auth.currentUser;
     // O custo é em horas, mas userTime está em minutos. 
     const requiredMinutes = reward.requiredHours * 60;
 
@@ -52,23 +35,12 @@ function Rewards() {
       try {
         await updateDoc(rewardRef, { availableCount: reward.availableCount - 1 });
 
-        if (user) {
-          const userRef = doc(db, 'users', user.uid);
-          const userDoc = await getDoc(userRef);
-          const redeemedRewards = userDoc.data().redeemedRewards || [];
-          await updateDoc(userRef, { 
-            redeemedRewards: [...redeemedRewards, { rewardId: reward.id, code: reward.gameCode, date: new Date() }],
-            timeOnSite: userTime - requiredMinutes
-          });
-          localStorage.setItem('timeOnSite', userTime - requiredMinutes);
-        } else {
-          const newLocalTime = userTime - requiredMinutes;
-          localStorage.setItem('timeOnSite', newLocalTime);
-          setUserTime(newLocalTime);
-          
-          const localRedeemed = JSON.parse(localStorage.getItem('redeemedRewards') || '[]');
-          localStorage.setItem('redeemedRewards', JSON.stringify([...localRedeemed, { rewardId: reward.id, code: reward.gameCode, date: new Date() }]));
-        }
+        const newLocalTime = userTime - requiredMinutes;
+        localStorage.setItem('timeOnSite', newLocalTime);
+        setUserTime(newLocalTime);
+        
+        const localRedeemed = JSON.parse(localStorage.getItem('redeemedRewards') || '[]');
+        localStorage.setItem('redeemedRewards', JSON.stringify([...localRedeemed, { rewardId: reward.id, code: reward.gameCode, date: new Date() }]));
 
         setLastRedeemedCode(reward.gameCode);
         alert(`Sucesso! Seu código de resgate é: ${reward.gameCode}. Copie-o abaixo.`);

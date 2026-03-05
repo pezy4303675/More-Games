@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getFirestore, collection, getDocs, addDoc, doc, deleteDoc, updateDoc, query, orderBy } from 'firebase/firestore';
+import { collection, getDocs, addDoc, doc, deleteDoc, updateDoc, query, orderBy } from 'firebase/firestore';
+import { db } from '../firebase';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Edit, Trash2, LogOut, Plus, Save, X, Heart, Eye } from 'lucide-react';
@@ -44,7 +45,6 @@ function Dashboard() {
   const [editingReward, setEditingReward] = useState(null);
 
   const navigate = useNavigate();
-  const db = getFirestore();
 
   // Authentication Check
   useEffect(() => {

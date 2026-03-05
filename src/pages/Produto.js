@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router-dom";
-import { getFirestore, doc, getDoc, updateDoc, increment, collection, addDoc, getDocs, query, orderBy, serverTimestamp } from 'firebase/firestore';
+import { doc, getDoc, updateDoc, increment, collection, addDoc, getDocs, query, orderBy, serverTimestamp } from 'firebase/firestore';
+import { db } from '../firebase';
 import { useState, useEffect, useRef } from 'react';
 import { Heart, Eye } from 'lucide-react';
 import logo from '../imgs/logo.png';
@@ -19,7 +20,6 @@ export default function Produto() {
     const [userRating, setUserRating] = useState(0);
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState('');
-    const db = getFirestore();
     const frameContainerRef = useRef(null);
 
     useEffect(() => {

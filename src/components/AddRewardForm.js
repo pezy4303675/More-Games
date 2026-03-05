@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getFirestore, collection, addDoc, updateDoc, doc } from 'firebase/firestore';
+import { collection, addDoc, updateDoc, doc } from 'firebase/firestore';
+import { db } from '../firebase';
 
 function AddRewardForm({ rewardToEdit, onFinish }) {
   const [title, setTitle] = useState('');
@@ -47,7 +48,6 @@ function AddRewardForm({ rewardToEdit, onFinish }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const db = getFirestore();
     try {
       const rewardData = {
         title,

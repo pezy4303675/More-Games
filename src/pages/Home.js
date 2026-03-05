@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Heart, Eye } from "lucide-react";
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../firebase';
 import styles from './Produto.module.css';
 import Anuncio from "./Anuncio";
 
@@ -15,7 +16,6 @@ function Home({ searchQuery }) {
   useEffect(() => {
     const fetchProdutos = async () => {
       try {
-        const db = getFirestore();
         const produtosCollection = collection(db, 'games');
         const produtosSnapshot = await getDocs(produtosCollection);
         const produtosList = produtosSnapshot.docs.map(doc => ({

@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { getFirestore, collection, query, where, getDocs, updateDoc, doc, setDoc } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
+import { collection, query, where, getDocs, updateDoc, doc, setDoc } from 'firebase/firestore';
+import { auth, db } from '../firebase';
 
 function Redeem() {
   const [code, setCode] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
-  const db = getFirestore();
-  const auth = getAuth();
 
   const handleRedeem = async () => {
     if (!code) return;
@@ -44,8 +42,6 @@ function Redeem() {
         }
       }
 
-      const user = auth.currentUser;
-
       // Se a recompensa for um número, tratamos como HORAS
       const rewardValue = parseFloat(codeData.reward);
       const isTimeReward = !isNaN(rewardValue);
@@ -53,29 +49,15 @@ function Redeem() {
       if (isTimeReward) {
         const rewardMinutes = rewardValue * 60;
         const currentLocalTime = parseInt(localStorage.getItem('timeOnSite') || '0', 10);
-        const newTotalMinutes = currentLocalTime + rewardMinutes;
-
-        // Atualiza LocalStorage
-        localStorage.setItem('timeOnSite', newTotalMinutes);
-
-        // Se estiver logado, atualiza o Firestore também
-        if (user) {
-          const userRef = doc(db, 'users', user.uid);
-          await setDoc(userRef, { timeOnSite: newTotalMinutes }, { merge: true });
-        }
+        const newLocalTime = currentLocalTime + rewardMinutes;
         
-        setMessage(`Sucesso! Você ganhou ${rewardValue} horas de tempo.`);
+        localStorage.setItem('timeOnSite', newLocalTime);
+        setMessage(`Sucesso! Você ganhou ${rewardValue} horas de tempo no site.`);
       } else {
-        // Se for outro tipo de recompensa (ex: "Gift Card"), apenas mostramos
-        setMessage(`Código resgatado! Sua recompensa: ${codeData.reward}`);
+        setMessage(`Sucesso! Você resgatou: ${codeData.reward}`);
       }
 
-      // Marcar o código como utilizado
-      await updateDoc(doc(db, 'redeemCodes', codeDoc.id), { 
-        used: true, 
-        usedBy: user ? user.uid : 'guest',
-        usedAt: new Date()
-      });
+      await updateDoc(doc(db, 'redeemCodes', codeDoc.id), { used: true, usedAt: new Date() });
 
       setCode('');
     } catch (error) {

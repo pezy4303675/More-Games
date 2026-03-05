@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { initializeApp } from 'firebase/app';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './firebase';
 
 import './App.css';
 import './index';
@@ -26,22 +28,13 @@ import Sobre from './pages/Sobre';
 import TimeTracker from './components/TimeTracker';
 import Redeem from './pages/Redeem';
 
-const firebaseApp = initializeApp( {
-  apiKey: "AIzaSyDbiHiwceuMS6x0zybmYMVL_Do7h4IYTuE",
-  authDomain: "gameslint.firebaseapp.com",
-  projectId: "gameslint",
-  storageBucket: "gameslint.firebasestorage.app",
-  messagingSenderId: "103155088844",
-  appId: "1:103155088844:web:d9d31d4eefacbdfe5e7169",
-  measurementId: "G-Q2LVWV74BR"
-});
-
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <Router>
       <TimeTracker />
+      <ToastContainer position="top-right" autoClose={3000} theme="dark" />
       <div className='Appitem'>
       <Navbar setSearchQuery={setSearchQuery}/>
       <Container>

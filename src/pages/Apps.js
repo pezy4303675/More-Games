@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { getFirestore, collection, getDocs, orderBy, query } from 'firebase/firestore';
+import { collection, getDocs, orderBy, query } from 'firebase/firestore';
+import { db } from '../firebase';
 import { Link } from 'react-router-dom';
 import LinesEllipsis from 'react-lines-ellipsis';
 import styles from './Produto.module.css';
@@ -53,7 +54,6 @@ function Apps() {
   const [appsList, setAppsList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const db = getFirestore();
 
   useEffect(() => {
     const loadApps = async () => {
@@ -92,7 +92,7 @@ function Apps() {
     };
 
     loadApps();
-  }, [db]);
+  }, []);
 
   if (loading) return <div style={{color: 'white', textAlign: 'center', marginTop: '20px'}}>Carregando apps...</div>;
   if (error) return <div style={{color: 'white', textAlign: 'center', marginTop: '20px'}}>{error}</div>;

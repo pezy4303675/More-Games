@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { collection, addDoc, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { db } from '../firebase';
 import { Trash2 } from 'lucide-react';
 
 function RedeemCodeManager() {
@@ -7,8 +8,6 @@ function RedeemCodeManager() {
   const [newCode, setNewCode] = useState('');
   const [reward, setReward] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
-
-  const db = getFirestore();
 
   const fetchCodes = async () => {
     const codesSnapshot = await getDocs(collection(db, 'redeemCodes'));
